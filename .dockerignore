@@ -1,0 +1,37 @@
+# Node dependencies
+**/node_modules/
+
+# Angular build output
+**/dist/
+out-tsc/
+coverage/
+
+# Environment files (optional - don’t ignore if you need them in build)
+# environment.ts
+# environment.prod.ts
+
+# IDE and editor folders
+.vscode/
+.idea/
+
+# OS and temp files
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.tmp
+*.bak
+*~
+
+# Git and CI/CD config
+.git/
+.gitignore
+.gitattributes
+
+# Docker and build config
+.dockerignore
+**/Dockerfile*
+
+# Test files
+karma.conf.js
+test.ts
