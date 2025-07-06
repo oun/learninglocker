@@ -8,13 +8,13 @@ RUN npm_config_build_from_source=true yarn install --ignore-engines
 
 COPY . .
 
-RUN yarn build-api-server
+RUN yarn build-ui-server && yarn build-ui-client
 
 FROM node:12-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/api/dist ./dist
+COPY --from=builder /app/ui/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
 # Install envsubst
