@@ -4,11 +4,14 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN npm_config_build_from_source=true yarn install --ignore-engines
+RUN npm_config_build_from_source=true yarn install --ignore-engines --frozen-lockfile
 
 COPY . .
 
 RUN yarn build-api-server
+
+RUN rm -rf node_modules \
+  && npm_config_build_from_source=true yarn install --offline --production --ignore-engines --frozen-lockfile
 
 FROM node:12-alpine
 
