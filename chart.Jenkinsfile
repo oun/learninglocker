@@ -11,7 +11,7 @@ pipeline {
   }
 
   environment {
-    PROJECT = 'charts'
+    PROJECT = 'learninglocker-charts'
     MAIN_BRANCH = 'master'
     CHARTS_DIRECTORY = "charts"
     DOCKER_REGISTRY = 'harbor.dltv.ac.th'
