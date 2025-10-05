@@ -1,0 +1,38 @@
+pipeline {
+  agent {
+    kubernetes {
+      label 'node-lts-erbium'
+      defaultContainer 'node'
+    }
+  }
+
+  parameters {
+    string(name: 'BUILD_VERSION', description: 'The version to build')
+  }
+
+  environment {
+    PROJECT = 'learninglocker'
+    SERVICE = 'api'
+    MAIN_BRANCH = 'master'
+    SOURCE_DIRECTORY = 'api'
+    DOCKER_REGISTRY = 'harbor.dltv.ac.th'
+    DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${SERVICE}"
+    REGISTRY_CREDENTIALS = 'registry-credentials'
+  }
+
+  stages {
+    stage("Build docker image") {
+      container('dind') {
+        sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
+      }
+    }
+
+    stage("Publish docker image") {
+      container('dind') {
+        docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
+          sh "docker push -a ${DOCKER_IMAGE}"
+        }
+      }
+    }
+  }
+}
