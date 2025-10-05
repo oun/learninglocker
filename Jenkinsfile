@@ -27,7 +27,7 @@ pipeline {
         }
       }
       steps {
-        sh "yarn install"
+        sh "npm_config_build_from_source=true yarn install --ignore-engines --frozen-lockfile"
       }
     }
 
