@@ -8,15 +8,14 @@ pipeline {
 
   parameters {
     string(name: 'BUILD_VERSION', description: 'The version to build')
+    choice(name: 'SERVICE', choices: ['api', 'ui', 'worker'], description: 'The service to build')
   }
 
   environment {
     PROJECT = 'learninglocker'
-    SERVICE = 'api'
     MAIN_BRANCH = 'master'
-    SOURCE_DIRECTORY = 'api'
     DOCKER_REGISTRY = 'harbor.dltv.ac.th'
-    DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${SERVICE}"
+    DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${params.SERVICE}"
     REGISTRY_CREDENTIALS = 'registry-credentials'
   }
 
@@ -27,7 +26,7 @@ pipeline {
       }
       steps {
         container('dind') {
-          sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
+          sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${params.SERVICE}/Dockerfile ."
         }
       }
     }
