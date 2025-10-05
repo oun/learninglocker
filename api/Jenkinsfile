@@ -38,8 +38,10 @@ pipeline {
       }
       steps {
         container('dind') {
-          docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
-            sh "docker push -a ${DOCKER_IMAGE}"
+          script {
+            docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
+              sh "docker push -a ${DOCKER_IMAGE}"
+            }
           }
         }
       }
