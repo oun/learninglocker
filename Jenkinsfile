@@ -7,17 +7,15 @@ pipeline {
   }
 
   parameters {
-    string(name: 'BUILD_VERSION', defaultValue: '1.0.0', description: 'The version to build')
+    string(name: 'BUILD_VERSION', description: 'The version to build')
   }
 
   environment {
     PROJECT = 'learninglocker'
-    SERVICES = ['api', 'ui', 'worker']
     MAIN_BRANCH = 'master'
     SOURCE_DIRECTORY = 'api'
     DOCKER_REGISTRY = 'harbor.dltv.ac.th'
     REGISTRY_CREDENTIALS = 'registry-credentials'
-    IMAGE_TAG = params.BUILD_VERSION
   }
 
   stages {
@@ -70,17 +68,18 @@ pipeline {
     }
 
     script {
+      def SERVICES = ['api', 'ui', 'worker']
       for (int i = 0; i < SERVICES.size(); i++) {
         def SERVICE = SERVICES[i]
         def DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${SERVICE}"
-        
+
         stage("Build docker image - ${SERVICE}") {
           when { 
             branch MAIN_BRANCH
           }
           steps {
             container('dind') {
-              sh "docker build -t ${DOCKER_IMAGE}:${IMAGE_TAG} -f ${SERVICE}/Dockerfile ."
+              sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
             }
           }
         }
