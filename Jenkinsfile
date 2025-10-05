@@ -79,19 +79,15 @@ pipeline {
             def DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${SERVICE}"
 
             stage("Build docker image - ${SERVICE}") {
-              steps {
-                container('dind') {
-                  sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
-                }
+              container('dind') {
+                sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
               }
             }
 
             stage("Publish docker image - ${SERVICE}") {
-              steps {
-                container('dind') {
-                  docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
-                    sh "docker push -a ${DOCKER_IMAGE}"
-                  }
+              container('dind') {
+                docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
+                  sh "docker push -a ${DOCKER_IMAGE}"
                 }
               }
             }
