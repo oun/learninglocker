@@ -67,31 +67,32 @@ pipeline {
       }
     }
 
-    script {
-      def SERVICES = ['api', 'ui', 'worker']
-      for (int i = 0; i < SERVICES.size(); i++) {
-        def SERVICE = SERVICES[i]
-        def DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${SERVICE}"
+    stage("Docker") {
+      when { 
+        branch MAIN_BRANCH
+      }
+      steps {
+        script {
+          def SERVICES = ['api', 'ui', 'worker']
+          for (int i = 0; i < SERVICES.size(); i++) {
+            def SERVICE = SERVICES[i]
+            def DOCKER_IMAGE = "${DOCKER_REGISTRY}/${PROJECT}/${SERVICE}"
 
-        stage("Build docker image - ${SERVICE}") {
-          when { 
-            branch MAIN_BRANCH
-          }
-          steps {
-            container('dind') {
-              sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
+            stage("Build docker image - ${SERVICE}") {
+              steps {
+                container('dind') {
+                  sh "docker build -t ${DOCKER_IMAGE}:${params.BUILD_VERSION} -f ${SERVICE}/Dockerfile ."
+                }
+              }
             }
-          }
-        }
 
-        stage("Publish docker image - ${SERVICE}") {
-          when { 
-            branch MAIN_BRANCH
-          }
-          steps {
-            container('dind') {
-              docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
-                sh "docker push -a ${DOCKER_IMAGE}"
+            stage("Publish docker image - ${SERVICE}") {
+              steps {
+                container('dind') {
+                  docker.withRegistry("https://${DOCKER_REGISTRY}", REGISTRY_CREDENTIALS) {
+                    sh "docker push -a ${DOCKER_IMAGE}"
+                  }
+                }
               }
             }
           }
