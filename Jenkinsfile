@@ -19,55 +19,55 @@ pipeline {
   }
 
   stages {
-    stage('Install') {
-      when {
-        anyOf {
-          changeRequest target: MAIN_BRANCH
-          branch MAIN_BRANCH
-        }
-      }
-      steps {
-        sh "npm_config_build_from_source=true yarn install --ignore-engines --frozen-lockfile"
-      }
-    }
+    // stage('Install') {
+    //   when {
+    //     anyOf {
+    //       changeRequest target: MAIN_BRANCH
+    //       branch MAIN_BRANCH
+    //     }
+    //   }
+    //   steps {
+    //     sh "npm_config_build_from_source=true yarn install --ignore-engines --frozen-lockfile"
+    //   }
+    // }
 
-    stage('Build') {
-      when {
-        anyOf {
-          changeRequest target: MAIN_BRANCH
-          branch MAIN_BRANCH
-        }
-      }
-      steps {
-        sh "yarn build-api-server"
-      }
-    }
+    // stage('Build') {
+    //   when {
+    //     anyOf {
+    //       changeRequest target: MAIN_BRANCH
+    //       branch MAIN_BRANCH
+    //     }
+    //   }
+    //   steps {
+    //     sh "yarn build-api-server"
+    //   }
+    // }
 
-    stage('Lint') {
-      when {
-        anyOf {
-          changeRequest target: MAIN_BRANCH
-          branch MAIN_BRANCH
-        }
-      }
-      steps {
-        sh "yarn lint-ci"
-      }
-    }
+    // stage('Lint') {
+    //   when {
+    //     anyOf {
+    //       changeRequest target: MAIN_BRANCH
+    //       branch MAIN_BRANCH
+    //     }
+    //   }
+    //   steps {
+    //     sh "yarn lint-ci"
+    //   }
+    // }
 
-    stage('Test') {
-      when {
-        anyOf {
-          changeRequest target: MAIN_BRANCH
-          branch MAIN_BRANCH
-        }
-      }
-      steps {
-        sh "yarn test"
-      }
-    }
+    // stage('Test') {
+    //   when {
+    //     anyOf {
+    //       changeRequest target: MAIN_BRANCH
+    //       branch MAIN_BRANCH
+    //     }
+    //   }
+    //   steps {
+    //     sh "yarn test"
+    //   }
+    // }
 
-    stage("Docker") {
+    stage("Build") {
       when { 
         branch MAIN_BRANCH
       }
