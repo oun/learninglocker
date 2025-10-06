@@ -5,4 +5,6 @@ metadata:
   labels:
 {{ include "worker.labels" . | indent 4 }}
 data:
-  REDIS_URL: "{{ .Values.redisUrl }}"
+  REDIS_HOST: "{{ .Values.redis.host }}"
+  REDIS_PORT: "{{ .Values.redis.port }}"
+  REDIS_DB: "{{ .Values.redis.db }}"

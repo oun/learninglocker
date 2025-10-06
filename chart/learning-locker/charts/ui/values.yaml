@@ -12,7 +12,7 @@ image:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: learning-locker-ui
+fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -101,5 +101,4 @@ pdb:
   enabled: false
   # minAvailable: 1
 
-secretName: ui-secret
 apiHost: api

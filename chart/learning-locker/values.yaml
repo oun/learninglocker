@@ -4,9 +4,16 @@
 
 api:
   enabled: true
+  fullnameOverride: learning-locker-api
 
 ui:
   enabled: true
+  fullnameOverride: learning-locker-ui
+  apiHost: learning-locker-api
 
 worker:
   enabled: true
+  fullnameOverride: learning-locker-worker
+
+global:
+  secretName: learning-locker-secret
