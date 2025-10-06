@@ -1,18 +1,18 @@
-# Default values for api.
+# Default values for worker.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: harbor.dltv.ac.th/learninglocker/api
+  repository: harbor.dltv.ac.th/learninglocker/worker
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: learning-locker-worker
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 80
 
 ingress:
   enabled: false
@@ -97,8 +97,8 @@ tolerations: []
 
 affinity: {}
 
-secretName: api-secret
-
 pdb:
   enabled: false
   # minAvailable: 1
+
+redisUrl: redis://redis:6379/0

@@ -1,18 +1,18 @@
-# Default values for ui.
+# Default values for api.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: harbor.dltv.ac.th/learninglocker/ui
+  repository: harbor.dltv.ac.th/learninglocker/api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: learning-locker-api
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 3000
+  port: 8080
 
 ingress:
   enabled: false
@@ -97,9 +97,8 @@ tolerations: []
 
 affinity: {}
 
+secretName: api-secret
+
 pdb:
   enabled: false
   # minAvailable: 1
-
-secretName: ui-secret
-apiHost: api

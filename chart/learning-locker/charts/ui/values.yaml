@@ -1,18 +1,18 @@
-# Default values for worker.
+# Default values for ui.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: harbor.dltv.ac.th/learninglocker/worker
+  repository: harbor.dltv.ac.th/learninglocker/ui
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: learning-locker-ui
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 3000
 
 ingress:
   enabled: false
@@ -101,4 +101,5 @@ pdb:
   enabled: false
   # minAvailable: 1
 
-redisUrl: redis://redis:6379/0
+secretName: ui-secret
+apiHost: api
