@@ -8,9 +8,9 @@ pipeline {
 
   environment {
     CHART_NAME = "learning-locker"
-    PROJECT = 'learninglocker-charts'
+    PROJECT = 'charts'
     MAIN_BRANCH = 'master'
-    CHARTS_DIRECTORY = "charts"
+    CHARTS_DIRECTORY = "chart"
     DOCKER_REGISTRY = 'harbor.dltv.ac.th'
     REGISTRY_CREDENTIALS = 'registry-credentials'
     CHART_REPOSITORY = "oci://${DOCKER_REGISTRY}/${PROJECT}"
