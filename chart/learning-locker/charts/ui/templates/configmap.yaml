@@ -6,3 +6,4 @@ metadata:
 {{ include "ui.labels" . | indent 4 }}
 data:
   API_HOST: "{{ .Values.apiHost }}"
+  UI_PORT: "{{ .Values.service.port }}"

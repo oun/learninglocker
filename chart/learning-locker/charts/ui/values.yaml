@@ -100,5 +100,3 @@ affinity: {}
 pdb:
   enabled: false
   # minAvailable: 1
-
-apiHost: api

@@ -53,6 +53,9 @@ spec:
                   name: {{ .Values.global.secretName }}
                   key: MONGODB_URL
           {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "api.fullname" . }}
           livenessProbe:
             httpGet:
               path: /
