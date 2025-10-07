@@ -1,19 +1,26 @@
 #!/bin/sh
 
 export NODE_ENV="${NODE_ENV:-production}"
+export UI_HOST="${UI_HOST:-}"
 export UI_PORT="${UI_PORT:-3000}"
+export API_HOST="${API_HOST:-}"
 export API_PORT="${API_PORT:-8080}"
 export MONGODB_URL="${MONGODB_URL:-mongodb://localhost:27017/learninglocker_v2}"
 export MONGODB_TEST_URL="${MONGODB_TEST_URL:-mongodb://localhost:27017/llv2tests}"
+export MONGO_SOCKET_TIMEOUT_MS="${MONGO_SOCKET_TIMEOUT_MS:-300000}"
+export MONGO_CONNECTION_POOLSIZE="${MONGO_CONNECTION_POOLSIZE:-20}"
 export REDIS_HOST="${REDIS_HOST:-127.0.0.1}"
 export REDIS_PORT="${REDIS_PORT:-6379}"
 export REDIS_DB="${REDIS_DB:-0}"
 export REDIS_PREFIX="${REDIS_PREFIX:-LEARNINGLOCKER}"
 export LOG_MIN_LEVEL="${LOG_MIN_LEVEL:-info}"
+export COLOR_LOGS="${COLOR_LOGS:-true}"
 export GOOGLE_ENABLED="${GOOGLE_ENABLED:-false}"
 export QUEUE_PROVIDER="${QUEUE_PROVIDER:-REDIS}"
 export QUEUE_NAMESPACE="${QUEUE_NAMESPACE:-DEV}"
 export FS_REPO="${FS_REPO:-local}"
+export JWT_ACCESS_TOKEN_EXPIRATION="${JWT_ACCESS_TOKEN_EXPIRATION:-1h}"
+export JWT_REFRESH_TOKEN_EXPIRATION="${JWT_REFRESH_TOKEN_EXPIRATION:-7d}"
 
 envsubst < /app/env.template > /app/.env
 
