@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "learning-locker"
+data:
+  API_HOST: "{{ .Values.global.api.host }}"
+  API_PORT: "{{ .Values.global.api.port }}"
+  UI_PORT: "{{ .Values.global.ui.port }}"
+  REDIS_HOST: "{{ .Values.global.redis.host }}"
+  REDIS_PORT: "{{ .Values.global.redis.port }}"
+  REDIS_DB: "{{ .Values.global.redis.db }}"
+  REDIS_PREFIX: "{{ .Values.global.redis.prefix }}"
+  LOG_MIN_LEVEL: "{{ .Values.global.logLevel }}"

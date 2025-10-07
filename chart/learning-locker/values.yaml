@@ -9,7 +9,6 @@ api:
 ui:
   enabled: true
   fullnameOverride: learning-locker-ui
-  apiHost: learning-locker-api
 
 worker:
   enabled: true
@@ -17,3 +16,14 @@ worker:
 
 global:
   secretName: learning-locker-secret
+  api:
+    host: learning-locker-api
+    port: 8080
+  ui:
+    port: 3000
+  redis:
+    host: localhost
+    port: 6379
+    db: 0
+    prefix: dev
+  logLevel: info

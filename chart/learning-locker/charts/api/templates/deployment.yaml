@@ -55,7 +55,7 @@ spec:
           {{- end }}
           envFrom:
             - configMapRef:
-                name: {{ template "api.fullname" . }}
+                name: "learning-locker"
           livenessProbe:
             httpGet:
               path: /

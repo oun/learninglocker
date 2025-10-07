@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "{{ template "api.fullname" . }}"
-  labels:
-{{ include "api.labels" . | indent 4 }}
-data:
-  API_PORT: "{{ .Values.service.port }}"

@@ -42,6 +42,11 @@ spec:
               protocol: TCP
           {{- if .Values.global.secretName }}
           env:
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.secretName }}
+                  key: APP_SECRET
             - name: MONGODB_URL
               valueFrom:
                 secretKeyRef:
@@ -50,7 +55,7 @@ spec:
           {{- end }}
           envFrom:
             - configMapRef:
-                name: {{ template "ui.fullname" . }}
+                name: "learning-locker"
           livenessProbe:
             httpGet:
               path: /
